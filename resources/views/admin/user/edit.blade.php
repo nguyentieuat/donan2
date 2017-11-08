@@ -34,7 +34,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input class="form-control" name="password" />
+                                <input type="password" class="form-control" name="password" />
+                            </div>
+                            <div class="form-group">
+                                <label>Re-Password</label>
+                                <input type="password" class="form-control" name="re_password" />
                             </div>
                             <div class="form-group">
                                 <label>Level</label>

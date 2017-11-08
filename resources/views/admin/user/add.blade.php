@@ -34,7 +34,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input class="form-control" name="password" placeholder="Please Enter Password" />
+                                <input type="password" class="form-control" name="password" placeholder="Please Enter Password" />
+                            </div>
+                            <div class="form-group">
+                                <label>Re-Password</label>
+                                <input type="password" class="form-control" name="re_password" placeholder="Please Enter Re-Password"/>
                             </div>
                             <div class="form-group">
                                 <label>Level</label>

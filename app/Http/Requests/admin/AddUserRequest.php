@@ -27,7 +27,7 @@ class AddUserRequest extends FormRequest
             'email'  => 'required|max:40|unique:tb_user,email',
             'pass'   => 'required|min:8|max:16',
             'repass' => 'required|same:pass',
-            'phone'  => 'required|regex:/^[0-9]+$/|min:10|max:11',
+            'phone'  => 'required|regex:/^[0-9]+$/|min:10|max:11|unique:tb_user,phone',
         ];
     }
 
@@ -51,6 +51,7 @@ class AddUserRequest extends FormRequest
             'phone.min'       => 'Số điện thoại phải ít nhất 10 số',
             'phone.max'       => 'Số điện thoại tối đa 11 số',
             'phone.regex'     => 'Số điện thoại phải là phải số',
+            'phone.unique'    => 'Số điện thoại đã tồn tại',
         ];
     }
 }

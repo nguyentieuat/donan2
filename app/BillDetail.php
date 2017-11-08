@@ -11,7 +11,7 @@ class BillDetail extends Model
 
     public function bill()
     {
-        return $this->belongsTo('App\Order', 'oid','id');
+        return $this->belongsTo('App\Bills', 'oid','id');
     }
 
     public function product()

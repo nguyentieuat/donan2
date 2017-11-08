@@ -28,7 +28,7 @@ class ProductController extends Controller
     
     }
 
-    public function postEdit(Request $req,$id){
+    public function postEdit(UpdateProductRequest $req,$id){
         $product = Product::find($id);
         if (isset($req->image)) {
             $product=Product::find($id);

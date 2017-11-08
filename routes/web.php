@@ -14,6 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('admin/login','UserController@getLoginAdmin');
+Route::post('admin/login','UserController@postLoginAdmin');
+Route::get('admin/logout','UserController@getLogoutAdmin');
+
 Route::group(['prefix'=>'admin'],function(){
 	Route::group(['prefix'=>'category'],function(){
 		Route::get('list','CategoryController@getList');
@@ -87,16 +91,9 @@ Route::group(['prefix'=>'admin'],function(){
 	Route::group(['prefix'=>'comment'],function(){
 		Route::get('del/{id}/{pid}','CommentController@getDel');
 	});
-	Route::group(['prefix'=>'bills'],function(){
-		Route::get('list','BillsController@getList');
-		// Route::get('edit/{id}','UserController@getEdit');
-		// Route::post('edit/{id}','UserController@postEdit');
-		// Route::get('add','UserController@getAdd');
-		// Route::post('add','UserController@postAdd');
-		// Route::get('del/{id}','UserController@getDel');
-	});
-	Route::group(['prefix'=>'billdetail'],function(){
-		Route::get('list','BilldetailController@getList');
+	Route::group(['prefix'=>'bill'],function(){
+		Route::get('list','BillController@getList');
+		Route::get('detail/{id}','BillController@getDetail');
 		// Route::get('edit/{id}','UserController@getEdit');
 		// Route::post('edit/{id}','UserController@postEdit');
 		// Route::get('add','UserController@getAdd');
@@ -118,3 +115,23 @@ Route::group(['prefix'=>'admin'],function(){
 	});
 
 });
+Route::get('index',[
+	'as'=>'index',
+	'uses'=>'PageController@getIndex'
+]);
+Route::get('product-type/{type}',[
+	'as'=>'producttype',
+	'uses'=>'PageController@getProductType'
+]);
+Route::get('product-detail/{id}',[
+	'as'=>'productdetail',
+	'uses'=>'PageController@getProductDetail'
+]);
+Route::get('shopping-cart',[
+	'as'=>'shoppingcart',
+	'uses'=>'PageController@getShoppingCart'
+]);
+Route::get('contact',[
+	'as'=>'contact',
+	'uses'=>'PageController@getContact'
+]);

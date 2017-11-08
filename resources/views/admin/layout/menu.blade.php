@@ -64,10 +64,6 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="admin/comment/list"><i class="fa fa-bar-chart-o fa-fw"></i> Comment<span class="fa arrow"></span></a>                            
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> News<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -95,10 +91,10 @@
                             <a href="#"><i class="fa fa-users fa-fw"></i> Bills<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="admin/bills/list">List Bills</a>
+                                    <a href="admin/bill/list">List Bills</a>
                                 </li>
                                 <li>
-                                    <a href="admin/bills/add">Add Bills</a>
+                                    <a href="admin/bill/add">Add Bills</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

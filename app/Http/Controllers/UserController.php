@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\admin\UpdateUserRequest;
+use App\Http\Requests\admin\AddUserRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\User;
@@ -12,6 +13,9 @@ use App\Brand;
 use App\Listimg;
 use Illuminate\Support\Facades\Storage;
 use File;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+
 class UserController extends Controller
 {
     public function getList(){
@@ -24,7 +28,7 @@ class UserController extends Controller
     
     }
 
-    public function postEdit(Request $req,$id){
+    public function postEdit(UpdateUserRequest $req,$id){
         $user = User::find($id);
         if (isset($req->avatar)) {
             $avatar=File::delete('upload/user/'.$user->avatar);
@@ -38,7 +42,7 @@ class UserController extends Controller
             $user->avatar = $nameImg;
         }
         if (isset($req->password)) {
-            $user->password=$req->password;
+            $user->password=bcrypt($req->password);;
         }
         $user->update([
             'name'=>$req->name,
@@ -56,22 +60,26 @@ class UserController extends Controller
         return view('admin.user.add');
         
     }
-    public function postAdd(Request $req){
+    public function postAdd(AddUserRequest $req){
         $user = new User;
         $user->name = $req->name;
         $user->email = $req->email;
         $user->phone = $req->phone;
-        $user->password = $req->password;
+        $user->password = bcrypt($req->password);;
         $user->status = $req->status;
         $user->level = $req->level;        
-        $file = $req->avatar;
-        $nameI=$file->getClientOriginalName();
-        $nameImg=str_random(6)."_".$nameI;
-        while(file_exists("upload/user".$nameImg)){
+        if (isset($req->avatar)) {
+             $file = $req->avatar;
+            $nameI=$file->getClientOriginalName();
             $nameImg=str_random(6)."_".$nameI;
-        }
-        $file->move("upload/user",$nameImg);
-        $user->avatar = $nameImg;   
+            while(file_exists("upload/user".$nameImg)){
+            $nameImg=str_random(6)."_".$nameI;
+            }
+            $file->move("upload/user",$nameImg);
+            $user->avatar = $nameImg;  
+         } else{
+            $user->avatar = "";
+         } 
 
         $user->save();
         return redirect('admin/user/add')->with('success','Thêm thành công');
@@ -88,5 +96,24 @@ class UserController extends Controller
             $user->delete();    
             return redirect('admin/user/list')->with('success','Xóa thành công');
         }
-   
+
+    public function getLoginAdmin()
+    {
+        return view('admin.login');
+    }
+    public function postLoginAdmin(Request $req)
+    {
+        $email = $req->email;
+        $password = $req->password;;
+        if (Auth::attempt(['email'=>$email,'password'=>$password])) {
+            return redirect('admin/user/list');
+        }else{
+            return redirect('admin/login')->with('err','Dang nhap that bai');
+        }
+    }
+
+    public function getLogoutAdmin(){
+        Auth::logout();
+        return redirect('admin/login');
+    }
 }

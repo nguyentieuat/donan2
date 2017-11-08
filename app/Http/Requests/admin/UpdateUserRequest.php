@@ -27,7 +27,7 @@ class UpdateUserRequest extends FormRequest
             'email'  => 'required|max:40|unique:tb_user,email,' . $this->id,
             'pass'   => 'nullable|min:8|max:16',
             'repass' => 'same:pass',
-            'phone'  => 'required|regex:/^[0-9]+$/|min:10|max:11',
+            'phone'  => 'required|regex:/^[0-9]+$/|min:10|max:11|unique:tb_user,phone,' . $this->id,
             'avatar' => 'nullable|mimes:jpeg,png,jpg'
         ];
     }

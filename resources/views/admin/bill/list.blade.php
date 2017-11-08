@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Bills
+                        <h1 class="page-header">Order
                             <small>List</small>
                         </h1>
                     </div>
@@ -21,7 +21,7 @@
                                 <th>Total</th>
                                 <th>Note</th>
                                 <th>Status</th>
-                                <th>Delete</th>
+                                <th>Detail</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
@@ -33,8 +33,8 @@
                                 <td>{{$bill->total}}</td>
                                 <td>{{$bill->note}}</td>
                                 <td>{{$bill->status}}</td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
+                                <td class="center"><i class="glyphicon glyphicon-eye-open"></i><a href="admin/bill/detail/{{$bill->id}}"> Detail</a></td>
+                                <td class="center"><i class="glyphicon glyphicon-edit"></i> <a href="admin/bill/edit/{{$bill->id}}">Edit</a></td>
                             </tr>
                             @endforeach
                         </tbody>
