@@ -119,23 +119,23 @@
                                 <th >User</th>
                                 <th >Content</th>
                                 <th >Rate</th>
-                                <th >Status</th>
                                 <th >Create at</th>
                                 <th width="4%">Del</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($product->comment as $cm)
+                            @if($cm->status==1)
                             <tr class="odd gradeX" align="left">
                                 <td>{{$cm->id}}</td>
                                 <td>{{$cm->user->name}}</td>
                                 <td>{{$cm->content}}</td>                                
                                 <td>{{$cm->rate}}</td>
-                                <td>{{$cm->status}}</td>
                                 <td>{{$cm->create_at}}</td>
                                 <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/comment/del/{{$cm->id}}/{{$cm->pid}}"> Del</a>
                                 
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>

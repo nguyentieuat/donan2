@@ -19,10 +19,10 @@ class Cart extends Model
     }
 
     public function addCart($item,$id){
-        $price_unit_or_promotion = $item->unit_price;
-        if($item->promotion_price!=0)
+        $price_unit_or_promotion = $item->u_price;
+        if($item->p_price!=0)
         {
-            $price_unit_or_promotion = $item->promotion_price;
+            $price_unit_or_promotion = $item->p_price;
         }
         $giohang = ['qty'=>0, 'price' => $price_unit_or_promotion, 'item' => $item];
         if($this->items){
@@ -34,6 +34,7 @@ class Cart extends Model
         $giohang['price'] = $price_unit_or_promotion * $giohang['qty'];
         $this->items[$id] = $giohang;
         $this->totalQty++;
+        $this->getTotal($this->items);
     }
     //xóa 1
     public function reduceByOne($id){
@@ -50,6 +51,13 @@ class Cart extends Model
         $this->totalQty -= $this->items[$id]['qty'];
         $this->totalPrice -= $this->items[$id]['price'];
         unset($this->items[$id]);
+    }
+    private function getTotal($items) {
+        $total = 0;
+        foreach ($items as $key => $value) {
+            $total += $value['price'];
+        }
+        $this->totalPrice = $total;
     }
 
 }

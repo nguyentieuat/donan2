@@ -11,7 +11,17 @@ use App\Comment;
 use Illuminate\Support\Facades\Auth;
 class CommentController extends Controller
 {
-    
+    public function getList(){
+        $comment = Comment::where('status',0)->get();
+        return view('admin.comment.list',['comment'=>$comment]);
+    }
+
+    public function UpdateComment(Request $req, $id){
+        $comment = Comment::find($id);
+        $comment->update(['status' => $req->status]);
+        return redirect('admin.comment.list');
+    }
+
     public function getDel($id,$pid){
         $comment = Comment::find($id);
         $comment->delete();

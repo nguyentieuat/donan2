@@ -7,7 +7,7 @@
 		</div>
 		<div class="pull-right">
 			<div class="beta-breadcrumb font-large">
-				<a href="{{url('index)}}">Home</a> / <span>Sản phẩm</span>
+				<a href="{{url('index')}}">Home</a> / <span>Sản phẩm</span>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -21,7 +21,7 @@
 				<div class="col-sm-3">
 					<ul class="aside-menu">
 						@foreach ($cate as $t)
-						<li><a href="{{url('product-type/'.$t->id)}}">{{$t->name}}</a></li>
+						<li><a href="{{url('product-type/') . $t->id }}">{{$t->name}}</a></li>
 						@endforeach
 					</ul>
 				</div>
@@ -41,7 +41,7 @@
 										<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
 									@endif
 									<div class="single-item-header">
-										<a href="{{url('product-detail/'.$pro->id)}}"><img src="upload/product/{{$pro->images}}" style="width: 270px; height: 320px" alt=""></a>
+										<a href="{{url('product-detail/'.$pro->id)}}"><img src="upload/product/{{$pro->images}}" style="width: 320px; height: 270px" alt=""></a>
 									</div>
 									<div class="single-item-body">
 										<p class="single-item-title" style="font-size: 15px;margin-bottom: 5px;height: 40px">{{$pro->name}}</p>
@@ -81,7 +81,7 @@
 										<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
 									@endif
 									<div class="single-item-header">
-										<a href="{{url('product-detail/'.$pro->id)}}"><img src="upload/product/{{$pro->images}}" style="width: 270px; height: 320px" alt=""></a>
+										<a href="{{url('product-detail/'.$pro->id)}}"><img src="upload/product/{{$pro->images}}" style="width: 320px; height: 270px" alt=""></a>
 									</div>
 									<div class="single-item-body">
 										<p class="single-item-title" style="font-size: 15px;margin-bottom: 5px;height: 40px">{{$pro->name}}</p>

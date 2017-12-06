@@ -28,23 +28,34 @@ class BillController extends Controller
     }
 
     public function getList(){
-    	$bill = Bills::all();
-    	return view('admin.bill.list',['bill'=>$bill]);
+    	$bill_new = Bills::where('status',0)->paginate(5);
+        $bill_accept = Bills::where('status',1)->paginate(5);
+    	return view('admin.bill.list',compact('bill_new','bill_accept'));
     }
-    public function getDetail($id){
-    	$total = 0;
+
+     public function UpdateOrder(Request $req, $id){
+
+       $bill = $this->__order->find($id);
+       $bill->update(['status' => $req->status]);
+        return redirect()->back();
+    }
+      public function getDetail($id)
+    {
+        $total = 0;
         $order = $this->__order->find($id);
         $order->s_status = Helper::valOfArr(Helper::orderStatusArr(), $order->status);
-        $cus = $this->__cus->find($order->id);
-        $cus->s_gender = Helper::valOfArr(Helper::genderArr(), $cus->gender);
-        $detail = $this->__orderDetail->where('oid',$order->id)->get();
-        foreach ($detail as $item) {
+        $cus = $this->__cus->find($order->cid);
+        // $cus->s_gender = Helper::valOfArr(Helper::genderArr(), $cus->gender);
+        // $cus->gender = $cus->gender;
+        $detail = $order->billDetail;
 
-            echo $item;
-            echo "</br>";
+        foreach ($detail as $item) {
             $total += $item->total;
 //            $ava[] = explode(',', $item->product->images)[0];
         }
+
+
+        return view('admin.bill.detail', compact('order', 'cus', 'detail', 'total'));
     }
-    
+
  }

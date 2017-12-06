@@ -21,8 +21,7 @@
                                 <th>User</th>
                                 <th>Content</th>
                                 <th>Rate</th>
-                                <th>Status</th>
-                                <th>Delete</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,9 +31,22 @@
                                 <td>{{ $com->product->name }}</td>
                                 <td>{{ $com->user->name}}</td>
                                 <td>{{ $com->content }}</td>
-                                <td>{{ $com->rate }}</td>
-                                <td>{{ $com->status }}</td>            
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/comment/del/{{$com->id}}"> Delete</a></td>
+                                <td>{{ $com->rate }}</td>          
+                                <td class="center">
+
+                                    <form method="post" action="{{route('update_comment', $com->id)}}">
+                                         {{ csrf_field() }} 
+                                        <input type="hidden" name="status" value="1">
+
+                                        <input  type="submit" value="accept" style="width: 55px; height: 25px; background-color: #176de8">
+                                    </form>
+                                    <form method="post" action="{{route('update_comment', $com->id)}}">
+                                         {{ csrf_field() }} 
+                                        <input type="hidden" name="status" value="2">
+
+                                        <input type="submit" value="deny" style="width: 55px; height: 25px; background-color: red">
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

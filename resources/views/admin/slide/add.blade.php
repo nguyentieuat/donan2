@@ -23,6 +23,10 @@
                                 <label>Link</label>
                                 <input type="text" class="form-control" name="link" />
                             </div>
+                            <!-- <div class="form-group">
+                                <label>Ordinal</label>
+                                <input type="number" class="form-control" name="ordinal"/>
+                            </div> -->
                             <button type="submit" class="btn btn-default">Slide Add</button>
                             <button type="reset" class="btn btn-default">Reset</button>
                         <form>

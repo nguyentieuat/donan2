@@ -17,7 +17,7 @@ class CreateCustomerTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('uid');
             $table->string('name');
-            $table->unsignedInteger('gender');
+            $table->string('gender');
             $table->string('phone');
             $table->string('email');
             $table->string('address');

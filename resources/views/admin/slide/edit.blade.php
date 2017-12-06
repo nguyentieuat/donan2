@@ -18,6 +18,11 @@
                             <div class="form-group">
                                 <label>Link</label>
                                 <input type="text" class="form-control" name="link" value="{{$slide->link}}"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Ordinal</label>
+                                <input type="hidden" name="stt" value="{!! $slide->ordinal !!}" >
+                                <input type="number" class="form-control" name="ordinal"/>
                             </div>                            
                             <button type="submit" class="btn btn-default">Link Edit</button>
                             <button type="reset" class="btn btn-default">Reset</button>

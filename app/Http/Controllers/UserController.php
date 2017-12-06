@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\UpdateUserRequest;
+use App\Http\Requests\admin\EditUserRequest;
 use App\Http\Requests\admin\AddUserRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -28,26 +28,17 @@ class UserController extends Controller
     
     }
 
-    public function postEdit(UpdateUserRequest $req,$id){
+    public function postEdit(EditUserRequest $req,$id){
+        
         $user = User::find($id);
-        if (isset($req->avatar)) {
-            $avatar=File::delete('upload/user/'.$user->avatar);
-            $file = $req->avatar;
-            $nameI=$file->getClientOriginalName();
-            $nameImg=str_random(6)."_".$nameI;
-            while(file_exists("upload/user".$nameImg)){
-                $nameImg=str_random(6)."_".$nameI;
-            }
-            $file->move("upload/user",$nameImg);
-            $user->avatar = $nameImg;
-        }
-        if (isset($req->password)) {
-            $user->password=bcrypt($req->password);;
+      
+        if (isset($req->pass)) {
+            $user->update([
+            'password'=>bcrypt($req->pass),
+        ]);
         }
         $user->update([
-            'name'=>$req->name,
             'email'=>$req->email,
-            'phone'=>$req->phone,
             'status'=>$req->status,
             'level'=>$req->level
         ]);
@@ -65,22 +56,9 @@ class UserController extends Controller
         $user->name = $req->name;
         $user->email = $req->email;
         $user->phone = $req->phone;
-        $user->password = bcrypt($req->password);;
+        $user->password = bcrypt($req->pass);
         $user->status = $req->status;
         $user->level = $req->level;        
-        if (isset($req->avatar)) {
-             $file = $req->avatar;
-            $nameI=$file->getClientOriginalName();
-            $nameImg=str_random(6)."_".$nameI;
-            while(file_exists("upload/user".$nameImg)){
-            $nameImg=str_random(6)."_".$nameI;
-            }
-            $file->move("upload/user",$nameImg);
-            $user->avatar = $nameImg;  
-         } else{
-            $user->avatar = "";
-         } 
-
         $user->save();
         return redirect('admin/user/add')->with('success','Thêm thành công');
         

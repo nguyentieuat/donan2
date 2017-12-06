@@ -13,37 +13,75 @@
                     </div>
                     <!-- /.col-lg-12 -->
                     @include('admin.errors.notes')
-                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <h2>Order new</h2>
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
                         <thead>
                             <tr align="center">
                                 <th>ID</th>
                                 <th>Custermer</th>
                                 <th>Total</th>
+                                <th>Payment</th>
                                 <th>Note</th>
-                                <th>Status</th>
-                                <th>Detail</th>
-                                <th>Edit</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($bill as $bill)
+                            @foreach($bill_new as $bill)
                             <tr class="odd gradeX" align="center">
                                 <td>{{$bill->id}}</td>
-                                <td>{{$bill->customer->name}}</td>
+                                <td><a href="{{route('detail', $bill->id)}}">{{$bill->customer->name}}</a></td>
                                 <td>{{$bill->total}}</td>
+                                <td>{{$bill->payment}}</td>
                                 <td>{{$bill->note}}</td>
-                                <td>{{$bill->status}}</td>
-                                <td class="center"><i class="glyphicon glyphicon-eye-open"></i><a href="admin/bill/detail/{{$bill->id}}"> Detail</a></td>
-                                <td class="center"><i class="glyphicon glyphicon-edit"></i> <a href="admin/bill/edit/{{$bill->id}}">Edit</a></td>
+                                <td class="center">
+
+                                    <form method="post" action="{{route('update_order', $bill->id)}}">
+                                         {{ csrf_field() }} 
+                                        <input type="hidden" name="status" value="1">
+                                        <input  type="submit" value="accept" style="width: 55px; height: 25px; background-color: #176de8">
+                                    </form>
+                                    <form method="post" action="{{route('update_order', $bill->id)}}">
+                                         {{ csrf_field() }} 
+                                        <input type="hidden" name="status" value="2">
+                                        <input type="submit" value="deny" style="width: 55px; height: 25px; background-color: red">
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    {{$bill_new->links()}}
+                </br>
+                    <h2>Order accepted</h2>
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
+                        <thead>
+                            <tr align="center">
+                                <th>ID</th>
+                                <th>Custermer</th>
+                                <th>Total</th>
+                                <th>Payment</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($bill_accept as $bill)
+                            <tr class="odd gradeX" align="center">
+                                <td>{{$bill->id}}</td>
+                                <td><a href="{{route('detail', $bill->id)}}">{{$bill->customer->name}}</a></td>
+                                <td>{{$bill->total}}</td>
+                                <td>{{$bill->payment}}</td>
+                                <td>{{$bill->note}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{$bill_accept->links()}}
                 </div>
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
+
 
 @endsection

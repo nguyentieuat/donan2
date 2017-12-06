@@ -67,7 +67,8 @@ Route::group(['prefix'=>'admin'],function(){
 
 	Route::group(['prefix'=>'comment'],function(){
 		Route::get('list','CommentController@getList');
-		Route::get('del/{id}','CommentController@getDel');	
+		Route::post('update/{id}','CommentController@UpdateComment')->name('update_comment');
+		Route::get('del/{id}/{pid}','CommentController@getDel');
 
 	});
   
@@ -88,14 +89,12 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('add','UserController@postAdd');
 		Route::get('del/{id}','UserController@getDel');
 	});
-	Route::group(['prefix'=>'comment'],function(){
-		Route::get('del/{id}/{pid}','CommentController@getDel');
-	});
+
 	Route::group(['prefix'=>'bill'],function(){
 		Route::get('list','BillController@getList');
-		Route::get('detail/{id}','BillController@getDetail');
+		Route::get('detail/{id}','BillController@getDetail')->name('detail');
 		// Route::get('edit/{id}','UserController@getEdit');
-		// Route::post('edit/{id}','UserController@postEdit');
+		Route::post('edit/{id}','BillController@UpdateOrder')->name('update_order');
 		// Route::get('add','UserController@getAdd');
 		// Route::post('add','UserController@postAdd');
 		// Route::get('del/{id}','UserController@getDel');
@@ -134,4 +133,52 @@ Route::get('shopping-cart',[
 Route::get('contact',[
 	'as'=>'contact',
 	'uses'=>'PageController@getContact'
+]);
+Route::get('add-to-cart/{id}',[
+	'as'=>'addtocart',
+	'uses'=>'PageController@getAddtoCart'
+]);
+Route::get('del-cart/{id}',[
+	'as'=>'delcart',
+	'uses'=>'PageController@getDelCart'
+]);
+Route::get('checkout',[
+	'as'=>'checkout',
+	'uses'=>'PageController@getCheckout'
+]);
+Route::post('checkout',[
+	'as'=>'checkout',
+	'uses'=>'PageController@postCheckout'
+]);
+Route::get('signup',[
+	'as'=>'signup',
+	'uses'=>'PageController@getSignup'
+]);
+Route::post('signup',[
+	'as'=>'signup',
+	'uses'=>'PageController@postSignup'
+]);
+Route::get('update/{id}',[
+	'as'=>'update',
+	'uses'=>'PageController@getUpdate'
+]);
+Route::post('update/{id}',[
+	'as'=>'update',
+	'uses'=>'PageController@postUpdate'
+]);
+Route::get('login',[
+	'as'=>'login',
+	'uses'=>'PageController@getLogin'
+]);
+Route::post('login',[
+	'as'=>'login',
+	'uses'=>'PageController@postLogin'
+]);
+Route::get('logout',[
+	'as'=>'logout',
+	'uses'=>'PageController@postLogout'
+]);
+Route::get('seach',[
+	'as'=>'seach',
+	'uses'=>'PageController@getSeach'
 ]);

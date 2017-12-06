@@ -31,7 +31,10 @@ class SlideController extends Controller
             ->update([                
                 'link'     => $req->link
             ]);
-
+        $tg = Slide::where('ordinal',$req->stt)->first();
+        // var_dump($tg->id);
+        Slide::where('ordinal',$req->ordinal)->update(['ordinal'=>$req->stt]);
+        Slide::where('id',$tg->id)->update(['ordinal'=>$req->ordinal]);
         return redirect('admin/slide/list')->with('success', 'Sửa thành công!');
     }
 
@@ -46,15 +49,25 @@ class SlideController extends Controller
             ]);
         $stt = Slide::count();
         $slide = new Slide;
-        $file = $req->image;
-        $nameI=$file->getClientOriginalName();
-        $nameImg=str_random(6)."_".$nameI;
-        while(file_exists("upload/slide".$nameImg)){
-            $nameImg=str_random(6)."_".$nameI;
+        if (isset($req->link)) {
+            $slide->link = $req->link;
+        } else {
+            $slide->link = '#';
         }
-        $file->move("upload/slide",$nameImg);
-        $slide->image = $nameImg;
-        $slide->link = $req->link;  
+
+        if (isset($req->image)) {
+            $file = $req->image;
+                $nameI=$file->getClientOriginalName();
+                $nameImg=str_random(6)."_".$nameI;
+                while(file_exists("upload/slide".$nameImg)){
+                $nameImg=str_random(6)."_".$nameI;
+            }
+            $file->move("upload/slide",$nameImg);
+            $slide->image = $nameImg;
+        } else{
+            $slide->image = null;
+        }
+          
         $slide->ordinal = ++$stt;         
         $slide->save();
 

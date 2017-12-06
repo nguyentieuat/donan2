@@ -18,7 +18,6 @@
                             <tr align="center">
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Avatar</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Level</th>
@@ -32,7 +31,6 @@
                             <tr class="odd gradeX" align="center">
                                 <td>{{$u->id}}</td>
                                 <td>{{$u->name}}</td>
-                                <td><img src="upload/user/{{$u->avatar}}" width="100px"></td>
                                 <td>{{$u->email}}</td>
                                 <td>{{$u->phone}}</td>
                                 <td>{{$u->level}}</td>

@@ -23,7 +23,7 @@
 	@yield('content')
 	</div> <!-- .container -->
 	@include('frontend.footer')
-
+	
 	<div class="copyright">
 		<div class="container">
 			<p class="pull-left">Privacy policy. (&copy;) 2014</p>
@@ -66,4 +66,3 @@
 	</script>
 </body>
 </html>
-  

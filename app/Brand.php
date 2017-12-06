@@ -9,6 +9,15 @@ class Brand extends Model
     protected $table = 'tb_brand';
     protected $guarded = [];
 
+    protected $fillable = [
+     	'id',
+     	'cid',
+     	'total',
+     	'note',
+     	'payment',
+     	'status',
+     ];
+
 
     public function product()
     {

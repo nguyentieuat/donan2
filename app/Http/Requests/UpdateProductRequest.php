@@ -25,7 +25,7 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'name'=> 'required',
-            'image'=> 'required',
+            // 'image'=> 'required',
             // 'category'=> 'required',
             'description'=> 'required',
             'brand'=> 'required',
@@ -43,7 +43,7 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'name.required' => 'Name required',
-            'image.required' => 'Image required',
+            // 'image.required' => 'Image required',
             // 'category.required' => 'Category required',
             'description.required' => 'Description is required',
             'brand.required' => 'Brand required',

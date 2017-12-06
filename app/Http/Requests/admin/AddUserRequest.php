@@ -24,6 +24,7 @@ class AddUserRequest extends FormRequest
     public function rules()
     {
         return [
+            'name'  => 'required|max:40',
             'email'  => 'required|max:40|unique:tb_user,email',
             'pass'   => 'required|min:8|max:16',
             'repass' => 'required|same:pass',
@@ -39,18 +40,20 @@ class AddUserRequest extends FormRequest
     public function messages()
     {
         return [
+            'name.required'  => 'Name không được bỏ trống',
+            'name.max'        => 'Name tối đa 16 ký tự',
             'email.required'  => 'Email không được bỏ trống',
             'email.email'     => 'Email không đúng định dạng',
             'email.unique'    => 'Email đã tồn tại',
             'pass.required'   => 'Mật khẩu không được bỏ trống',
-            'pass.min'        => 'Mật khẩu phải chứa ít nhất 8 ký tự',
-            'pass.max'        => 'Mật khẩu chỉ được phép tối đa 16 ký tự',
+            'pass.min'        => 'Mật khẩu chứa ít nhất 8 ký tự',
+            'pass.max'        => 'Mật khẩu tối đa 16 ký tự',
             'repass.required' => 'Hãy nhập lại mật khẩu',
             'repass.same'     => 'Mật khẩu nhập lại không khớp',
             'phone.required'  => 'Số điện thoại không được trống',
-            'phone.min'       => 'Số điện thoại phải ít nhất 10 số',
+            'phone.min'       => 'Số điện thoại ít nhất 10 số',
             'phone.max'       => 'Số điện thoại tối đa 11 số',
-            'phone.regex'     => 'Số điện thoại phải là phải số',
+            'phone.regex'     => 'Số điện thoại phải là số',
             'phone.unique'    => 'Số điện thoại đã tồn tại',
         ];
     }
