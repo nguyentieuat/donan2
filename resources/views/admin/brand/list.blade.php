@@ -18,8 +18,7 @@
                             <tr align="center">
                                 <th>ID</th>
                                 <th>Name</th>                                
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,8 +26,8 @@
                             <tr class="odd gradeX" align="center">
                                 <td>{{ $br->id }}</td>
                                 <td>{{ $br->name }}</td>                                
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/brand/edit/{{$br->id}}">Edit</a></td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/brand/del/{{$br->id}}"> Delete</a></td>
+                                <td class="center"><p><i class="fa fa-pencil fa-fw"></i> <a href="admin/brand/edit/{{$br->id}}">Edit</a></p> 
+                                    <p><i class="fa fa-trash-o  fa-fw"></i><a href="admin/brand/del/{{$br->id}}"> Delete</a></p></td>
                             </tr>
                             @endforeach
                         </tbody>

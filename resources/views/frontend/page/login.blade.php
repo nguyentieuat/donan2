@@ -15,8 +15,7 @@
 	</div>
 	
 	<div class="container">
-		<div id="content">
-			
+		<div id="content">			
 			<form action="{{route('login')}}" method="post" class="beta-form-checkout">
 				{{ csrf_field() }}
 				<div class="row">
@@ -34,6 +33,9 @@
 						<div class="form-block">
 							<label for="phone">Password*</label>
 							<input type="password" name="password" required>
+						</div>
+						<div class="form-block">
+							{!! Recaptcha::render() !!}
 						</div>
 						<div class="form-block">
 							<button type="submit" class="btn btn-primary">Login</button>

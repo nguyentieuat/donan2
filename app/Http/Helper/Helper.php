@@ -23,7 +23,8 @@ class Helper
     public static function orderStatusArr()
     {
         return array(
-            1 => 'Đang xử lý',
+            0 => 'Chờ xử lý',
+            1 => 'Đang tiến hành',
             2 => 'Shiper đã nhận hàng',
             3 => 'Đã giao hàng',
             4 => 'Không giao được hàng',

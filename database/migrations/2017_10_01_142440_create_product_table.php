@@ -27,6 +27,7 @@ class CreateProductTable extends Migration
             $table->string('guarentee');
             $table->date('date');
             $table->integer('qty');
+            $table->float('rate');
             $table->integer('view');
             $table->integer('sold');
             $table->integer('status');

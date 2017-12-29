@@ -13,13 +13,10 @@
                     </div>
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
-                        <!-- @include('admin.errors.notes') -->
+                        @include('admin.errors.notes')
                         <form action="" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}                            
                             <div class="form-group">
-                                @if($errors->has('email'))
-                            <div class='alert alert-danger'>{{ $errors->first('email') }}</div>
-                                @endif
                                 <label>Email</label>
                                 <input type="email" class="form-control" name="email" value="{{$user->email}}" />
                             </div>

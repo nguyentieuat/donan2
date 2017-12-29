@@ -51,11 +51,12 @@
 
 						<div class="form-block">
 							<label for="address">Address*</label>
-							<!-- @if(Auth::check())
-							<input type="text" id="adress" name="address" value="Auth::user()->address" required>
-							@else  -->
+							@if(!$customer)
 							<input type="text" id="adress" name="address" placeholder="Street Address" required>
-							<!-- @endif -->
+							@else
+							<input type="text" id="adress" name="address" value="{{$customer->address}}" required>
+							@endif
+							
 						</div>
 						
 
@@ -86,7 +87,7 @@
 											<img width="25%" height="90px" src="upload/product/{{$cart['item']['images']}}" alt="" class="pull-left">
 											<div class="media-body">
 												<p class="font-large">{{$cart['item']['name']}}</p>
-												<span class="color-gray your-order-info">Số Lượng: <input style="width: 40px;height: 25px;text-align: center; margin-top: 15px;" type="number" name="so_luong" value="{{$cart['qty']}}"></span>
+												<span class="color-gray your-order-info">Số Lượng: <input style="width: 40px;height: 25px;text-align: center; margin-top: 15px;" id="soluong" name="so_luong" value="{{$cart['qty']}}"></span>
 												<!-- <span class="color-gray your-order-info">Số Lượng: <input style="width: 40px;height: 25px;text-align: center" type="number" name="so_luong" value="{{$cart['qty']}}"></span> -->
 												<span class="color-gray your-order-info" style="margin-top: 10px">Đơn Giá: {{number_format($cart['price'])}}</span>
 											</div>
@@ -109,7 +110,7 @@
 							<div class="your-order-body">
 								<ul class="payment_methods methods">
 									<li class="payment_method_bacs">
-										<input id="payment_method_bacs" type="radio" class="input-radio" name="payment_method" value="COD" checked="checked" data-order_button_text="" name="payment">
+										<input id="payment_method_bacs" type="radio" class="input-radio" name="payment_method" value="COD" checked="checked" data-order_button_text="" >
 										<label for="payment_method_bacs">Thanh toán khi nhận hàng </label>
 										<div class="payment_box payment_method_bacs" style="display: block;">
 											Cửa hàng sẽ gửi hàng đến địa chỉ của bạn, bạn xem hàng rồi thanh toán tiền cho nhân viên giao hàng
@@ -117,7 +118,7 @@
 									</li>
 
 									<li class="payment_method_cheque">
-										<input id="payment_method_cheque" type="radio" class="input-radio" name="payment_method" value="ATM" data-order_button_text="" name="payment">
+										<input id="payment_method_cheque" type="radio" class="input-radio" name="payment_method" value="ATM" data-order_button_text="">
 										<label for="payment_method_cheque">Chuyển khoản </label>
 										<div class="payment_box payment_method_cheque" style="display: none;">
 											Chuyển tiền đến tài khoản sau:
@@ -129,8 +130,7 @@
 									
 								</ul>
 							</div>
-
-							<div class="text-center"><button class="beta-btn primary" href="{{route('checkout')}}">Đặt hàng <i class="fa fa-chevron-right"></i></button></div>
+								<div class="text-center"><button class="beta-btn primary" href="{{route('checkout')}}">Đặt hàng <i class="fa fa-chevron-right"></i></button></div>
 						</div> <!-- .your-order -->
 					</div>
 				</div>
@@ -138,7 +138,6 @@
 		</div> <!-- #content -->
 	</div> <!-- .container -->
 @endsection
-</script>
 <script>
 	 jQuery(document).ready(function($) {
                 'use strict';
@@ -167,5 +166,5 @@
         jQuery(this).addClass('icon-angle-left');
       }
     });
-				});
-	</script>
+});
+</script>

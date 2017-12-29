@@ -29,14 +29,23 @@ class BillController extends Controller
 
     public function getList(){
     	$bill_new = Bills::where('status',0)->paginate(5);
+        $count_new = Bills::where('status',0)->count();
         $bill_accept = Bills::where('status',1)->paginate(5);
-    	return view('admin.bill.list',compact('bill_new','bill_accept'));
+        $count_old = Bills::where('status',1)->count();
+    	return view('admin.bill.list',compact('bill_new','bill_accept','count_new','count_old'));
     }
 
      public function UpdateOrder(Request $req, $id){
 
        $bill = $this->__order->find($id);
+       $billDetail = $bill->billDetail;
+       foreach ($billDetail as $key => $value) {
+            $product = $this->__prd->find($value->pid);
+            $product->update([  'sold' => ($product->sold + $value->qty),
+                                'qty'  => ($product->sold - $value->qty)]);
+       }
        $bill->update(['status' => $req->status]);
+
         return redirect()->back();
     }
       public function getDetail($id)

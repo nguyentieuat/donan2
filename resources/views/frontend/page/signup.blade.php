@@ -61,12 +61,17 @@
 						<input type="password" name="repass" required>
 					</div>
 					<div class="form-block">
+						{!! Recaptcha::render() !!}
+					</div>
+					<div class="form-block">
 						<button type="submit" class="btn btn-primary">Register</button>
 						<button type="reset" class="btn btn-primary" style="color: black;background-color: white;border-color: black;">Reset</button>
 					</div>
 				</div>
 				<div class="col-sm-3"></div>
 			</div>
+			
+
 		</form>
 	</div> <!-- #content -->
 </div> <!-- .container -->

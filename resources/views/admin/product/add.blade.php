@@ -81,7 +81,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Status</label>
-                                <input type="number" class="form-control" name="status" placeholder="trạng thái" />
+                                <select name='status' class='form-control'>
+                                        <option value='1'>Mới</option>
+                                        <option value='2'>Cũ</option>
+                                        <option value='3'>Khác</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Description</label>

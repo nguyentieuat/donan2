@@ -11,10 +11,12 @@ use App\User;
 use App\Category;
 use App\Brand;
 use App\Listimg;
+use App\Customer;
 use Illuminate\Support\Facades\Storage;
 use File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use App\Http\Requests\admin\LoginRequest;
 
 class UserController extends Controller
 {
@@ -69,24 +71,35 @@ class UserController extends Controller
     public function getDel($id)
         {
             $user=User::find($id);
-            $image = File::delete('upload/user/' . $user->avatar);        
+            if(Customer::where('uid',$user->id)){
+                return redirect('admin/user/list')->with('err','Không thể xóa khách hàng');
+            } else {
+                $image = File::delete('upload/user/' . $user->avatar);        
            
-            $user->delete();    
-            return redirect('admin/user/list')->with('success','Xóa thành công');
+                $user->delete();    
+                return redirect('admin/user/list')->with('success','Xóa thành công');
+            }
+            
         }
 
     public function getLoginAdmin()
     {
         return view('admin.login');
     }
-    public function postLoginAdmin(Request $req)
+    public function postLoginAdmin(LoginRequest $req)
     {
-        $email = $req->email;
-        $password = $req->password;;
-        if (Auth::attempt(['email'=>$email,'password'=>$password])) {
-            return redirect('admin/user/list');
-        }else{
-            return redirect('admin/login')->with('err','Dang nhap that bai');
+        $user=User::where('email',$req->email)->get();
+        foreach ($user as $user) {
+            if($user->level==0 && $user->status==1){
+                 $credentials = array('email' => $req->email, 'password'=>$req->password );
+                if (Auth::attempt($credentials)) {
+                    return redirect('admin/bill/list')->with('success','Đăng nhập thành công');
+                } else{
+                    return redirect('admin/login')->with('err','Đăng nhập thất bại');
+                }
+            } else{
+                return redirect('admin/login')->with('err','Đăng nhập thất bại');
+            }
         }
     }
 

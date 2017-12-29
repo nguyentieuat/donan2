@@ -14,11 +14,14 @@
                     <!-- /.col-lg-12 -->
                     @include('admin.errors.notes')
                     <h2>Order new</h2>
+                    <p>Tổng số order mới: {{$count_new}}</p>
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
                         <thead>
                             <tr align="center">
                                 <th>ID</th>
                                 <th>Custermer</th>
+                                <th>Product</th>
+                                <th>Address</th>
                                 <th>Total</th>
                                 <th>Payment</th>
                                 <th>Note</th>
@@ -30,7 +33,9 @@
                             <tr class="odd gradeX" align="center">
                                 <td>{{$bill->id}}</td>
                                 <td><a href="{{route('detail', $bill->id)}}">{{$bill->customer->name}}</a></td>
-                                <td>{{$bill->total}}</td>
+                                <td><a href="{{route('detail', $bill->id)}}"> @foreach($bill->billDetail as $b) <p>{{$b->product->name}} @endforeach</p></a></td>
+                                <td>{{$bill->customer->address}}</td>
+                                <td>{{number_format($bill->total)}}</td>
                                 <td>{{$bill->payment}}</td>
                                 <td>{{$bill->note}}</td>
                                 <td class="center">
@@ -53,11 +58,14 @@
                     {{$bill_new->links()}}
                 </br>
                     <h2>Order accepted</h2>
+                    <p>Tổng số order: {{$count_old}}</p>
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
                         <thead>
                             <tr align="center">
                                 <th>ID</th>
                                 <th>Custermer</th>
+                                <th>Product</th>
+                                <th>Address</th>
                                 <th>Total</th>
                                 <th>Payment</th>
                                 <th>Note</th>
@@ -68,7 +76,9 @@
                             <tr class="odd gradeX" align="center">
                                 <td>{{$bill->id}}</td>
                                 <td><a href="{{route('detail', $bill->id)}}">{{$bill->customer->name}}</a></td>
-                                <td>{{$bill->total}}</td>
+                                <td><a href="{{route('detail', $bill->id)}}"> @foreach($bill->billDetail as $b) <p>{{$b->product->name}} @endforeach</p></a></td>                                
+                                <td>{{$bill->customer->address}}</td>
+                                <td>{{number_format($bill->total)}}</td>
                                 <td>{{$bill->payment}}</td>
                                 <td>{{$bill->note}}</td>
                             </tr>

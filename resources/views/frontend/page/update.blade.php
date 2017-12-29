@@ -3,11 +3,12 @@
 <div class="inner-header">
 	<div class="container">
 		<div class="pull-left">
-			<h6 class="inner-title">Đăng kí</h6>
+			<h6 class="inner-title">Cập nhật thông tin</h6><div class="space20">&nbsp;</div>
+			<span ><a href="{{route('changePass',$user->id)}}" style="color: red"> Đổi mật khẩu</a></span>
 		</div>
 		<div class="pull-right">
 			<div class="beta-breadcrumb">
-				<a href="index.html">Home</a> / <span>Đăng kí</span>
+				<a href="index.html">Home</a> / <span>Cập nhật thông tin</span>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -23,7 +24,7 @@
 				<div class="col-sm-3"></div>
 				@include('admin.errors.notes')
 				<div class="col-sm-6">
-					<h4>Đăng kí</h4>
+					<h4></h4>
 					<div class="space20">&nbsp;</div>
 
 					
@@ -56,17 +57,10 @@
 						<label for="password">Password*</label>
 						<input type="password" name="pass" required>
 					</div>
+					
 					<div class="form-block">
-						<label for="password">Password New*</label>
-						<input type="password" name="passnew" required>
-					</div>
-					<div class="form-block">
-						<label for="repassword">Re password New*</label>
-						<input type="password" name="repassnew" required>
-					</div>
-					<div class="form-block">
-						<button type="submit" class="btn btn-primary">Register</button>
-						<button type="reset" class="btn btn-primary" style="color: black;background-color: white;border-color: black;">Reset</button>
+						<button type="submit" class="btn btn-primary" style="width: 70px">Save</button>
+						<button type="reset" class="btn btn-primary" style="color: black;background-color: red;border-color: black;"><a href="{{route('index')}}">Cancle</a> <button>
 					</div>
 				</div>
 				<div class="col-sm-3"></div>

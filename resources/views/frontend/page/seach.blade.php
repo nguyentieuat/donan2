@@ -1,7 +1,6 @@
 @extends('frontend.master')
 @section('content')
 <!--slider-->
-</div>
 <div class="container">
 <div id="content" class="space-top-none">
 <div class="main-content">
@@ -83,7 +82,7 @@
 	</div>
 </div> <!-- end section with sidebar and main content -->
 
-
+</div>
 </div> <!-- .main-content -->
 </div> <!-- #content -->
 @endsection

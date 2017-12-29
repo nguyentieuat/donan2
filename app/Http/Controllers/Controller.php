@@ -16,9 +16,6 @@ class Controller extends BaseController
 	
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     function __construct(){
-    	// $this->currentUser = Auth::User();
-     //    View::share([ 'currentUser' => $this->currentUser ]);
+    
     }
-
-
 }

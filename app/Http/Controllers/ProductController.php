@@ -116,9 +116,10 @@ class ProductController extends Controller
             $nameImg=str_random(6)."_".$nameI;
         }
         $file->move("upload/product",$nameImg);
-        $product->images = $nameImg;   
-        $product->view=1;
-        $product->sold=1;        
+        $product->images = $nameImg;
+        $product->rate=5;
+        $product->view=0;
+        $product->sold=0;        
         $product->save();
         $pro_id = Product::all()->last()->id;
 

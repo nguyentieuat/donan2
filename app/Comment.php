@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     protected $table = 'tb_comment';
+
+    protected $fillable = [
+        'id',
+        'uid',
+        'pid',
+        'status',
+        'content',
+        'rate',
+
+    ];
     protected $guarded = [];
 
     public function user()

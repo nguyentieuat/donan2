@@ -22,8 +22,7 @@
                                 <th>Link</th>
                                 <th width="10%">Ordinal</th>
                                 <th width="10%">Swap</th>                               
-                                <th width="10%">Edit link</th>
-                                <th width="10%">Delete</th>
+                                <th width="10%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,8 +41,8 @@
                                         <input type="submit" name="submit" value="Đổi" class="btn btn-primary">
                                     </form>
                                 </td>                                
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/slide/edit/{{$sl->id}}">Edit link</a></td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/slide/del/{{$sl->id}}"> Delete</a></td>
+                                <td class="center"><p><i class="fa fa-pencil fa-fw"></i> <a href="admin/slide/edit/{{$sl->id}}">Edit link</a></p>
+                                <p><i class="fa fa-trash-o  fa-fw"></i><a href="admin/slide/del/{{$sl->id}}"> Delete</a></p></td>
                             </tr>
                             @endforeach
                         </tbody>

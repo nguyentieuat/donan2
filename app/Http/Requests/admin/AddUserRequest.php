@@ -26,7 +26,7 @@ class AddUserRequest extends FormRequest
         return [
             'name'  => 'required|max:40',
             'email'  => 'required|max:40|unique:tb_user,email',
-            'pass'   => 'required|min:8|max:16',
+            'pass'   => 'required|regex:/^(?=.*[\p{Ll}])(?=.*[\p{Lu}])(?=.*\d)(?=.*[$@$!%*?&])[\p{Ll}‌​\p{Lu}\d$@$!%*?&]{8,}$/',
             'repass' => 'required|same:pass',
             'phone'  => 'required|regex:/^[0-9]+$/|min:10|max:11|unique:tb_user,phone',
         ];
@@ -46,8 +46,7 @@ class AddUserRequest extends FormRequest
             'email.email'     => 'Email không đúng định dạng',
             'email.unique'    => 'Email đã tồn tại',
             'pass.required'   => 'Mật khẩu không được bỏ trống',
-            'pass.min'        => 'Mật khẩu chứa ít nhất 8 ký tự',
-            'pass.max'        => 'Mật khẩu tối đa 16 ký tự',
+            'pass.regex'      => 'Mật khẩu ít nhất 8 ký tự: tối thiểu 1 chữ hoa, 1 chữ thường, 1 số, 1 kí tự đặc biệt ',
             'repass.required' => 'Hãy nhập lại mật khẩu',
             'repass.same'     => 'Mật khẩu nhập lại không khớp',
             'phone.required'  => 'Số điện thoại không được trống',

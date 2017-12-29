@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\admin;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,8 +25,8 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'email'  => 'required|max:40|unique:tb_user,email,'.$this->id,
-            'passnew'   => 'required|min:8|max:16',
-            'repassnew' => 'required|same:pass',
+            'name'   => 'required',
+            'pass'   => 'required|regex:/^(?=.*[\p{Ll}])(?=.*[\p{Lu}])(?=.*\d)(?=.*[$@$!%*?&])[\p{Ll}‌​\p{Lu}\d$@$!%*?&]{8,}$/',
             'phone'  => 'required|regex:/^[0-9]+$/|min:10|max:11|unique:tb_user,phone,'.$this->id,
         ];
     }
@@ -42,11 +42,9 @@ class UpdateUserRequest extends FormRequest
             'email.required'  => 'Email không được bỏ trống',
             'email.email'     => 'Email không đúng định dạng',
             'email.unique'    => 'Email đã tồn tại',
+            'name.required'   => 'Tên không được bỏ trống',
             'pass.required'   => 'Mật khẩu không được bỏ trống',
-            'pass.min'        => 'Mật khẩu phải chứa ít nhất 8 ký tự',
-            'pass.max'        => 'Mật khẩu chỉ được phép tối đa 16 ký tự',
-            'repass.required' => 'Hãy nhập lại mật khẩu',
-            'repass.same'     => 'Mật khẩu nhập lại không khớp',
+            'pass.regex'      => 'Mật khẩu ít nhất 8 ký tự: tối thiểu 1 chữ hoa, 1 chữ thường, 1 số, 1 kí tự đặc biệt ',
             'phone.required'  => 'Số điện thoại không được trống',
             'phone.min'       => 'Số điện thoại phải ít nhất 10 số',
             'phone.max'       => 'Số điện thoại tối đa 11 số',

@@ -13,27 +13,27 @@
 									</div>
 								</div>
 
-		        </li>
-				@endforeach
-				</ul>
-							</div>
+			        </li>
+					@endforeach
+					</ul>
+						</div>
 						</div>
 
 						<div class="tp-bannertimer"></div>
 					</div>
-				</div>
+</div>
 				<!--slider-->
 	</div>
 	<div class="container">
 		<div id="content" class="space-top-none">
 			<div class="main-content">
-				<div class="space60">&nbsp;</div>
+				<div class="space20">&nbsp;</div>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="beta-products-list">
-							<h4>Sản phẩm mới</h4>
+							<h4>Sản Phẩm Mới</h4>
+							<div class="space20">&nbsp;</div>
 							<div class="beta-products-details">
-								<p class="pull-left">Tìm thấy {{count($new_product)}} sản phẩm</p>
 								<div class="clearfix"></div>
 							</div>
 
@@ -67,14 +67,13 @@
 									</div>
 									@endforeach
 							</div>
+							<div class="row">{{$new_product->links()}}</div>
 						</div> <!-- .beta-products-list -->
 
-						<div class="space50">&nbsp;</div>
-
 						<div class="beta-products-list">
-							<h4>Sản phẩm Khuyến mại</h4>
+							<h4>Sản Phẩm Khuyến Mại</h4>
+							<div class="space20">&nbsp;</div>
 							<div class="beta-products-details">
-								<p class="pull-left">Tìm thấy {{count($product_p)}} sản phẩm</p>
 								<div class="clearfix"></div>
 							</div>
 										<div class="row">
@@ -107,7 +106,7 @@
 											</div>
 											@endforeach				
 										</div>
-							
+								<div class="row">{{$product_p->links()}}</div>
 							</div>
 						</div> <!-- .beta-products-list -->
 					</div>
@@ -116,4 +115,5 @@
 
 			</div> <!-- .main-content -->
 		</div> <!-- #content -->
+
 @endsection

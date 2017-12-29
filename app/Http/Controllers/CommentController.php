@@ -18,8 +18,9 @@ class CommentController extends Controller
 
     public function UpdateComment(Request $req, $id){
         $comment = Comment::find($id);
+
         $comment->update(['status' => $req->status]);
-        return redirect('admin.comment.list');
+        return redirect('admin/comment/list');
     }
 
     public function getDel($id,$pid){

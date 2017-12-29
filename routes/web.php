@@ -11,14 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('wellcom');
+// });
 Route::get('admin/login','UserController@getLoginAdmin');
 Route::post('admin/login','UserController@postLoginAdmin');
 Route::get('admin/logout','UserController@getLogoutAdmin');
 
-Route::group(['prefix'=>'admin'],function(){
+Route::group(['prefix'=>'admin','middleware'=>'adminLogin'],function(){
+	Route::get('/', function () {
+    	return view('admin.login');
+	});
 	Route::group(['prefix'=>'category'],function(){
 		Route::get('list','CategoryController@getList');
 		Route::get('edit/{id}','CategoryController@getEdit');
@@ -101,26 +104,38 @@ Route::group(['prefix'=>'admin'],function(){
 	});
 	Route::group(['prefix'=>'customer'],function(){
 		Route::get('list','CustomerController@getList');
-		// Route::get('edit/{id}','UserController@getEdit');
-		// Route::post('edit/{id}','UserController@postEdit');
+		Route::get('edit/{id}','CustomerController@getEdit');
+		Route::post('edit/{id}','CustomerController@postEdit');
 		// Route::get('add','UserController@getAdd');
 		// Route::post('add','UserController@postAdd');
-		// Route::get('del/{id}','UserController@getDel');
+		Route::get('del/{id}','CustomerController@getDel');
 	});
 
 	Route::group(['prefix'=>'ajax'],function(){
 		Route::get('category/{parentId}','AjaxController@getCategory');
 		
 	});
+	Route::group(['prefix' => 'reports'], function () {
+        Route::get('/','ReportsController@index');
+        Route::post('fillter', 'ReportsController@getByPeriod')->name('report');
+    });
 
 });
-Route::get('index',[
+Route::get('/',[
 	'as'=>'index',
 	'uses'=>'PageController@getIndex'
 ]);
 Route::get('product-type/{type}',[
 	'as'=>'producttype',
 	'uses'=>'PageController@getProductType'
+]);
+Route::get('all',[
+	'as'=>'all',
+	'uses'=>'PageController@getAll'
+]);
+Route::get('danhmuc/{id}',[
+	'as'=>'danhmuc',
+	'uses'=>'PageController@DanhMuc'
 ]);
 Route::get('product-detail/{id}',[
 	'as'=>'productdetail',
@@ -141,6 +156,14 @@ Route::get('add-to-cart/{id}',[
 Route::get('del-cart/{id}',[
 	'as'=>'delcart',
 	'uses'=>'PageController@getDelCart'
+]);
+Route::get('reduceByOne/{id}',[
+	'as'=>'reduceByOne',
+	'uses'=>'PageController@reduceByOne'
+]);
+Route::get('addOne/{id}',[
+	'as'=>'addOne',
+	'uses'=>'PageController@addOne'
 ]);
 Route::get('checkout',[
 	'as'=>'checkout',
@@ -166,6 +189,14 @@ Route::post('update/{id}',[
 	'as'=>'update',
 	'uses'=>'PageController@postUpdate'
 ]);
+Route::get('changepass/{id}',[
+	'as'=>'changePass',
+	'uses'=>'PageController@getChangePass'
+]);
+Route::post('changepass/{id}',[
+	'as'=>'changePass',
+	'uses'=>'PageController@ChangePass'
+]);
 Route::get('login',[
 	'as'=>'login',
 	'uses'=>'PageController@getLogin'
@@ -173,6 +204,10 @@ Route::get('login',[
 Route::post('login',[
 	'as'=>'login',
 	'uses'=>'PageController@postLogin'
+]);
+Route::post('logcheckout',[
+	'as'=>'logcheckout',
+	'uses'=>'PageController@logCheckout'
 ]);
 Route::get('logout',[
 	'as'=>'logout',
@@ -182,3 +217,12 @@ Route::get('seach',[
 	'as'=>'seach',
 	'uses'=>'PageController@getSeach'
 ]);
+
+Route::post('comment',[
+	'as'=>'store-comment',
+	'uses'=>'PageController@storeComment'
+]);
+
+Route::any('/{any}', function ($any) {
+    return redirect(route('index'));
+})->where('any', '.*');

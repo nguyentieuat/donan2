@@ -19,8 +19,7 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Category Parent</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,8 +33,8 @@
                                 @else
                                     <td>{{ $cate->parentId }}</td>
                                 @endif
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/category/edit/{{$cate->id}}">Edit</a></td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/category/del/{{$cate->id}}"> Delete</a></td>
+                                <td class="center"><p><i class="fa fa-pencil fa-fw"></i> <a href="admin/category/edit/{{$cate->id}}">Edit</a></p>
+                                    <p><i class="fa fa-trash-o  fa-fw"></i><a href="admin/category/del/{{$cate->id}}"> Delete</a></p></td>
                             </tr>
                             @endforeach
                         </tbody>

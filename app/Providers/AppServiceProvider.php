@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
             $viewP->with(compact('categoryP','categoryC'));
     });
 
-        view()->composer(['frontend.header','frontend.page.checkout'],function($view){
+        view()->composer(['frontend.header','frontend.page.checkout','frontend.page.logcheckout'],function($view){
             if(Session('cart')){
                 $oldCart = Session::get('cart');
                 $cart = new Cart($oldCart);

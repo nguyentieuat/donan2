@@ -10,6 +10,7 @@
                         <h1 class="page-header">User
                             <small>List</small>
                         </h1>
+                        <p>Tổng số user: {{count($user)}}</p>
                     </div>
                     <!-- /.col-lg-12 -->
                     @include('admin.errors.notes')

@@ -13,7 +13,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="admin/reports"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-list-alt"></i> Brand<span class="fa arrow"></span></a>
@@ -101,9 +101,6 @@
                                 <li>
                                     <a href="admin/bill/list">List Bills</a>
                                 </li>
-                                <li>
-                                    <a href="admin/bill/add">Add Bills</a>
-                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -112,9 +109,6 @@
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="admin/customer/list">List Customer</a>
-                                </li>
-                                <li>
-                                    <a href="admin/customer/add">Add Customer</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

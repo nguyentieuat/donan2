@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">News
+                        <h1 class="page-header">Comment
                             <small>List</small>
                         </h1>
                     </div>

@@ -3,7 +3,7 @@
 <div class="inner-header">
 	<div class="container">
 		<div class="pull-left">
-			<h6 class="inner-title">Product {{$product->name}}</h6>
+			<h6 class="inner-title">Chi Tiết Sản Phẩm</h6>
 		</div>
 		<div class="pull-right">
 			<div class="beta-breadcrumb font-large">
@@ -25,7 +25,8 @@
 					</div>
 					<div class="col-sm-8">
 						<div class="single-item-body">
-							<p class="single-item-title" style="font-size: 15px;margin-bottom: 5px;height: 40px">{{$product->name}}</p><div class="clearfix"></div>
+							<b class="single-item-title" style="font-size: 18px;margin-bottom: 5px;height: 40px;">{{$product->name}}</b>
+							<div class="clearfix"></div>
 							<p class="single-item-price" style="font-size: 14px;margin-bottom: 5px;">
 								@if($product->p_price==0)
 											<span class="flash-sale">{{number_format($product->u_price)}}</span>
@@ -43,14 +44,14 @@
 							<p>{{$product->description}}</p>
 						</div>
 						<div class="space20">&nbsp;</div> -->
-						 <div class="rateit" data-rateit-readonly="true" data-rateit-value="4.0" data-rateit-step="0.1"></div>
-        <p>{{number_format(4,1)}} Star rating | 5 Reviews</p>
-						<p style="margin-top: 5px;  margin-bottom: 5px;"><span >Kích Thước:</span> {{$product->size}}</p>
-						<p style="margin-top: 5px;  margin-bottom: 5px;"><span >Vật Liệu:</span> {{$product->main_material}}</p>
-						<p style="margin-top: 5px;  margin-bottom: 5px;"><span>Bảo Hành:</span> {{$product->guarentee}}</p>
-						<p style="margin-top: 5px;  margin-bottom: 5px;"><span>Xuất xứ:</span> {{$product->brand->name}}</p>
-						<p style="margin-top: 5px;  margin-bottom: 5px;"><span>Trạng thái:</span> @if($product->qty==0) Hết hàng @else Còn Hàng @endif</p>
-						<p><span>Options:</span>
+						 <input id="input-3" name="input-3" value="{{number_format($product->rate, 1)}}" class="input-3 rating-loading">
+        				<p>{{number_format($product->rate, 1)}} Star rating | {{count($product->comment)}} Reviews</p>
+						<p style="margin-top: 5px;  margin-bottom: 5px;"><b >Kích Thước:</b> {{$product->size}}</p>
+						<p style="margin-top: 5px;  margin-bottom: 5px;"><b >Vật Liệu:</b> {{$product->main_material}}</p>
+						<p style="margin-top: 5px;  margin-bottom: 5px;"><b>Bảo Hành:</b> {{$product->guarentee}}</p>
+						<p style="margin-top: 5px;  margin-bottom: 5px;"><b>Xuất xứ:</b> {{$product->brand->name}}</p>
+						<p style="margin-top: 5px;  margin-bottom: 5px;"><b>Trạng thái:</b> @if($product->qty==0) Hết hàng @else Còn Hàng @endif</p>
+						<p><b>Options:</b>
 							<!-- <select class="wc-select" name="size">
 								<option>Size</option>
 								<option value="XS">XS</option>
@@ -67,7 +68,9 @@
 								<option value="Black">Black</option>
 								<option value="White">White</option>
 							</select> -->
-							<select class="wc-select" name="color" >
+							<form action="{{route('addtocart',$product->id)}}" method="get">
+								{{ csrf_field() }}
+								<select class="wc-select" name="qty" >
 								<option>Qty</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -75,7 +78,8 @@
 								<option value="4">4</option>
 								<option value="5">5</option>
 							</select>
-							<a class="add-to-cart" href="{{route('addtocart',$product->id)}}"><i class="fa fa-shopping-cart"></i></a>
+							<button class="btn btn-primary"><i class="fa fa-shopping-cart"></i></button>
+							</form>
 							<div class="clearfix"></div>
 						</p>
 					<!-- 	<div class="single-item-options">
@@ -113,20 +117,19 @@
 				<div class="woocommerce-tabs">
 					<ul class="tabs">
 						<li><a href="#tab-description">Description</a></li>
-						<li><a href="#tab-reviews">Reviews (0)</a></li>
+						<li><a href="#tab-reviews">Reviews ({{count($cmt)}})</a></li>
 					</ul>
 
 					<div class="panel" id="tab-description">
 						{!! $product->description !!}
 					</div>
 					<div class="panel" id="tab-reviews">
-						<p>No Reviews</p>
-						 
+						 @include('frontend.page.comment')
 					</div>
 				</div>
-				<div class="space50">&nbsp;</div>
+				<div class="space20">&nbsp;</div>
 				<div class="beta-products-list">
-					<h4>Related Products</h4>
+					<h4>Sản Phẩm Cùng Loại</h4>
 
 					<div class="row">
 						@foreach($product_same as $pro)
@@ -151,7 +154,7 @@
 								</div>
 								<div class="single-item-caption">
 									<a class="add-to-cart pull-left" href="{{route('addtocart',$pro->id)}}"><i class="fa fa-shopping-cart"></i></a>
-									<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
+									<a class="beta-btn primary" href="{{url('product-detail/'.$pro->id)}}">Details <i class="fa fa-chevron-right"></i></a>
 									<div class="clearfix"></div>
 								</div>
 							</div>
@@ -162,15 +165,15 @@
 			</div>
 			<div class="col-sm-3 aside">
 				<div class="widget">
-					<h3 class="widget-title">Best Sellers</h3>
+					<h3 class="widget-title">Sản Phẩm Bán Chạy</h3>
 					<div class="widget-body">
 						<div class="beta-sales beta-lists">
 							@foreach($product_sell as $pro)
 							<div class="media beta-sales-item">
-								<a class="pull-left" href="{{url('product-detail/'.$pro->id)}}"><img src="upload/product/{{$pro->images}}" style="width: 58px; height: 56px" alt=""></a>
+								<a class="pull-left" href="{{url('product-detail/'.$pro->id)}}"><img src="upload/product/{{$pro->images}}" style="width: 58px; height: 56px" alt="">
 								<div class="media-body">
-									<p class="single-item-title" style="font-size: 12px;margin-bottom: 5px;height: 20px">{{$pro->name}}</p>
-									<p class="single-item-price" style="font-size: 11px;margin-top:20px;">
+									<p class="single-item-title" style="font-size: 12px;">{{$pro->name}}</p></a>
+									<p class="single-item-price" style="font-size: 11px;">
 										@if($pro->p_price==0)
 											<span class="flash-sale">{{number_format($pro->u_price)}}</span>
 											@else
@@ -185,15 +188,15 @@
 					</div>
 				</div> <!-- best sellers widget -->
 				<div class="widget">
-					<h3 class="widget-title">New Products</h3>
+					<h3 class="widget-title">Sản Phẩm Mới</h3>
 					<div class="widget-body">
 						<div class="beta-sales beta-lists">
 							@foreach($product_new as $pro)
 							<div class="media beta-sales-item">
-								<a class="pull-left" href="{{url('product-detail/'.$pro->id)}}"><img src="upload/product/{{$pro->images}}" style="width: 58px; height: 56px" alt=""></a>
+								<a class="pull-left" href="{{url('product-detail/'.$pro->id)}}"><img src="upload/product/{{$pro->images}}" style="width: 58px; height: 56px" alt="">
 								<div class="media-body">
-									<p class="single-item-title" style="font-size: 12px;margin-bottom: 5px;height: 20px">{{$pro->name}}</p>
-									<p class="single-item-price" style="font-size: 11px;margin-top:20px;">
+									<p class="single-item-title" style="font-size: 12px;">{{$pro->name}}</p></a>
+									<p class="single-item-price" style="font-size: 11px;">
 										@if($pro->p_price==0)
 											<span class="flash-sale">{{number_format($pro->u_price)}}</span>
 											@else

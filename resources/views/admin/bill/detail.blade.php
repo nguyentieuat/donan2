@@ -30,8 +30,12 @@
 </head>
 
 <body>
-
+    <div class="space0">&nbsp;</div>
+    <div>
+        <a href='{!! url('admin/bill/list') !!}' class='btn btn-warning'>Quay lại</a>
+    </div>&nbsp;
     <div id="wrapper">
+    
  <!-- Page Content -->
          <!-- customer info -->
     <div class='panel panel-info col-xs-12 col-md-4 order-info1'>
@@ -80,7 +84,7 @@
 
             <div>
                 <span>Total:</span>
-                <span class='right'>{!! $order->total !!} VNĐ</span>
+                <span class='right'>{!! number_format($order->total) !!} VNĐ</span>
             </div>
 
             <div>
@@ -121,23 +125,21 @@
                         <td>{{$item->product->name}}</td>
                         <td><img width="250px" src='{{url('upload/product/'.explode(',', $item->product->images)[0])}}'></td>
                         <td>@if(($item->product->p_price)!=0)
-                            {{$item->product->p_price}} @else {{$item->product->u_price}} @endif VNĐ</td>
+                            {{number_format($item->product->p_price)}} @else {{number_format($item->product->u_price)}} @endif VNĐ</td>
                         <td>{{$item->qty}}</td>
-                        <td>{{$item->total}} VNĐ</td>
+                        <td>{{number_format($item->total)}} VNĐ</td>
                     </tr>
                 @endforeach
                 <tr>
                     <td colspan='5' style='text-align: right'>Số tiền phải thanh toán: </td>
-                    <td>{{$total}} VNĐ</td>
+                    <td>{{number_format($total)}} VNĐ</td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <div>
-        <a href='{!! url('admin/bill/list') !!}' class='btn btn-warning'>Quay lại</a>
-    </div>
+
         <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->

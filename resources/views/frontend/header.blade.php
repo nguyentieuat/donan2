@@ -23,12 +23,13 @@
 		<div class="header-body">
 			<div class="container beta-relative">
 				<div class="pull-left">
-					<a href="index.html" id="logo"><img src="assets/dest/images/logo-cake.png" width="200px" alt=""></a>
+					<a href="{{route('index')}}" id="logo"><h1>Merry Christmas</h1><!-- <img src="assets/dest/images/logo-cake.png" width="200px" alt=""> --></a>
 				</div>
 				<div class="pull-right beta-components space-left ov">
 					<div class="space10">&nbsp;</div>
 					<div class="beta-comp">
 						<form role="search" method="get" id="searchform" action="{{route('seach')}}">
+						<input type="hidden" content="{{ csrf_token() }}">
 				        <input type="text" value="" name="key" id="s" placeholder="Nhập từ khóa..." />
 				        <button class="fa fa-search" type="submit" id="searchsubmit"></button>
 					</form>
@@ -41,11 +42,14 @@
 							<div class="beta-dropdown cart-body">@if(Session::has('cart'))
         @foreach($product_cart as $product)
 								<div class="cart-item">
-									<a class="cart-item-delete"
-                   href="{{route('delcart',$product['item']['id'])}}"><i
-                            class="fa fa-times"></i></a>
+									<span class="cart-item-delete" style="background: #ffffff;font-size: 20px;width:15px;height: 60px;">
+										<a href="{{route('delcart',$product['item']['id'])}}" ><i class="fa fa-times" style="line-height: 1.5;"></i></a>
+	                            		<a href="{{route('reduceByOne',$product['item']['id'])}}"><i class="fa fa-minus" style="line-height: 1.5;"></i></a>
+	                            		<a href="{{route('addOne',$product['item']['id'])}}"><i class="fa fa-plus" style="line-height: 1.5;"></i></a>
+									</span>
+
 									<div class="media">
-										<a class="pull-left" href="">
+										<a class="pull-left" href="{{url('product-detail/'.$product['item']['id'])}}">
                         <img height="50px" width="50px"
                              src="upload/product/{{$product['item']['images']}}">
                     </a>
@@ -85,10 +89,10 @@
 				<nav class="main-menu">
 				<ul class="l-inline ov">
 					<li><a href="{{route('index')}}">Trang chủ</a></li>
-					<li><a href="#">Sản phẩm</a>
+					<li><a href="{{route('all')}}">Sản phẩm</a>
 						<ul class="sub-menu">
 							@foreach($categoryP as $cateP)
-							<li><a href="{{route('index')}}">{{$cateP->name}}</a>
+							<li><a href="{{url('danhmuc/'.$cateP->id)}}">{{$cateP->name}}</a>
 								<ul class="sub-menu">
 									@foreach($cateP->childHas as $submenu)
                                         <li><a href="{{url('product-type/'.$submenu->id)}}">{{$submenu->name}}</a></li>
@@ -99,8 +103,9 @@
 							@endforeach
 						</ul>
 					</li>
-					<li><a href="about.html">Giới thiệu</a></li>
-					<li><a href="contacts.html">Liên hệ</a></li>
+					<li><a href="">Tin tức</a></li>
+					<li><a href="">Giới thiệu</a></li>
+					<li><a href="">Liên hệ</a></li>
 				</ul>
 				<div class="clearfix"></div>
 			</nav>

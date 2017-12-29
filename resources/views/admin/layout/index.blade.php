@@ -26,7 +26,16 @@
     <!-- DataTables Responsive CSS -->
     <link href="admin_asset/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
     <script type="text/javascript" language="javascript" src="admin_asset/ckeditor/ckeditor.js" ></script>
-
+    
+    <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{{ asset('report/css/adminStyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('report/css/datepicker3.css') }}">
+    <script src="{{ asset('report/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('report/js/chart.min.js') }}"></script>
+    <script src="{{ asset('report/js/admin.js') }}"></script>
 </head>
 
 <body>

@@ -38,13 +38,33 @@ class Cart extends Model
     }
     //xóa 1
     public function reduceByOne($id){
+        // dd($this->items);
         $this->items[$id]['qty']--;
-        $this->items[$id]['price'] -= $this->items[$id]['item']['price'];
+        // $this->items[$id]['price'] -= $this->items[$id]['item']['price'];
         $this->totalQty--;
-        $this->totalPrice -= $this->items[$id]['item']['price'];
+        if ($this->items[$id]['item']['p_price'] !=0) {
+            $this->items[$id]['price'] -= $this->items[$id]['item']['p_price'];
+        } else {
+            $this->items[$id]['price'] -= $this->items[$id]['item']['u_price'];
+        }
         if($this->items[$id]['qty']<=0){
             unset($this->items[$id]);
         }
+        $this->getTotal($this->items);
+    }
+    public function addOne($id){
+        $this->items[$id]['qty']++;
+        // $this->items[$id]['price'] += $this->items[$id]['item']['price'];
+        $this->totalQty++;
+        if ($this->items[$id]['item']['p_price'] !=0) {
+            $this->items[$id]['price'] += $this->items[$id]['item']['p_price'];
+        } else {
+            $this->items[$id]['price'] += $this->items[$id]['item']['u_price'];
+        }
+        if($this->items[$id]['qty']<=0){
+            unset($this->items[$id]);
+        }
+        $this->getTotal($this->items);
     }
     //xóa nhiều
     public function removeItem($id){
